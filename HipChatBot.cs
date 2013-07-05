@@ -62,7 +62,7 @@ namespace HipChatBot
         /// message: message text
         /// </summary>
         /// <param name="roomId"></param>
-        /// <returns></returns>
+        /// <returns>A dictionary indexed by the message timestamp connected to a KeyValuePair of user:message</returns>
         public Dictionary<DateTime, KeyValuePair<string, string>> getChatHistory(string roomId)
         {
             Dictionary<DateTime, KeyValuePair<string, string>> history = new Dictionary<DateTime, KeyValuePair<string, string>>();
@@ -106,29 +106,34 @@ namespace HipChatBot
                 foreach (var o in messages)
                 {
                     Dictionary<string, object> message = (Dictionary<string, object>)o;
-                    KeyValuePair<string, string> userMessage = new KeyValuePair<string, string>();
-                    Dictionary<string, string> user = (Dictionary<string, string>) message["from"];
-                    string userName = user["name"];
-                    string mess = message["message"].ToString();
-
-                    history.Add((DateTime)message["date"], new KeyValuePair<string, string>(userName, mess));
+                    Dictionary<string, object> user = (Dictionary<string, object>) message["from"];
+                    string userName = user["name"].ToString();
+                    string msg = message["message"].ToString();
+                    
+                    Console.WriteLine(message["date"].GetType());
+                    history.Add(DateTimeOffset.Parse(message["date"].ToString()).UtcDateTime, new KeyValuePair<string, string>(userName, msg));
                 }
             }
 
             return history;
         }
 
+        /// <summary>
+        /// Retrieves the last message posted to the given room
+        /// </summary>
+        /// <param name="roomID"></param>
+        /// <returns></returns>
         public string getLastMessage(string roomID)
         {
+            string lastMessage = string.Empty;
             Dictionary<DateTime, KeyValuePair<string, string>> history = getChatHistory(roomID);
+            SortedDictionary<DateTime, KeyValuePair<string, string>> sortedHistory = new SortedDictionary<DateTime, KeyValuePair<string, string>>(history);
+            if (sortedHistory.Count() > 0)
+            {
+                lastMessage = sortedHistory.Last().Value.Value;
+            }
 
-            //Sort the dictionary according to message timestamp
-            List<KeyValuePair<string, object>> messages = history.ToList();
-            messages.Sort(
-                delegate()
-            );
-
-            return "";
+            return lastMessage;
         }
 
 

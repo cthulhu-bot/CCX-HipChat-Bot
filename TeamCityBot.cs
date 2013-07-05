@@ -16,6 +16,7 @@ namespace HipChatBot
             //while (true)
             //{
                 string lastMessage = bot.getLastMessage(testRoom);
+                Console.WriteLine(lastMessage);
 
                 System.Threading.Thread.Sleep(1000);
             //}
