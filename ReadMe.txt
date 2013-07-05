@@ -6,3 +6,5 @@ Label - teamcitybot
 Email - jpstup@gmail.com
 RoomID - 228638
 RoomName - CCX General
+RoomID - 232822
+RoomName - testing

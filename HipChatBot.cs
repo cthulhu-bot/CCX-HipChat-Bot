@@ -77,6 +77,10 @@ namespace HipChatBot
                 try
                 {
                     webResponse = webClient.DownloadString(uri);
+                    while (webResponse.Contains("403") || webResponse.Equals(""))
+                    {
+                        webResponse = webClient.DownloadString(uri);
+                    }
                 }
                 catch (WebException ex)
                 {
@@ -87,7 +91,9 @@ namespace HipChatBot
                             case HttpStatusCode.NotFound:
                                 history = null;
                                 break;
-
+                            case HttpStatusCode.Forbidden:
+                                Console.WriteLine(ex.Message);
+                                break;
                             default:
                                 throw ex;
                         }
@@ -110,8 +116,8 @@ namespace HipChatBot
                     string userName = user["name"].ToString();
                     string msg = message["message"].ToString();
                     
-                    Console.WriteLine(message["date"].GetType());
-                    history.Add(DateTimeOffset.Parse(message["date"].ToString()).UtcDateTime, new KeyValuePair<string, string>(userName, msg));
+                    if (!history.ContainsKey(DateTimeOffset.Parse(message["date"].ToString()).UtcDateTime))
+                        history.Add(DateTimeOffset.Parse(message["date"].ToString()).UtcDateTime, new KeyValuePair<string, string>(userName, msg));
                 }
             }
 
@@ -119,18 +125,20 @@ namespace HipChatBot
         }
 
         /// <summary>
-        /// Retrieves the last message posted to the given room
+        /// Retrieves the last message posted to the given room and the user who posted it
         /// </summary>
         /// <param name="roomID"></param>
-        /// <returns></returns>
-        public string getLastMessage(string roomID)
+        /// <returns>KeyValuePair - user:request</returns>
+        public KeyValuePair<string, string> getLastMessage(string roomID)
         {
-            string lastMessage = string.Empty;
+            KeyValuePair<string, string> lastMessage = new KeyValuePair<string, string>();
             Dictionary<DateTime, KeyValuePair<string, string>> history = getChatHistory(roomID);
             SortedDictionary<DateTime, KeyValuePair<string, string>> sortedHistory = new SortedDictionary<DateTime, KeyValuePair<string, string>>(history);
             if (sortedHistory.Count() > 0)
             {
-                lastMessage = sortedHistory.Last().Value.Value;
+                string user = sortedHistory.Last().Value.Key;
+                string message = sortedHistory.Last().Value.Value;
+                lastMessage = new KeyValuePair<string, string>(user, message);
             }
 
             return lastMessage;
