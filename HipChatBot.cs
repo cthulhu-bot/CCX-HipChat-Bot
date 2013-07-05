@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -54,9 +55,17 @@ namespace HipChatBot
             return status;
         }
 
-        public string getChatHistory(string roomId)
+        /// <summary>
+        /// Returns a dictionary containing the following fields parsed from the json returned by the hipchat api:
+        /// date: message timestamp
+        /// from: {name: username, user_id: id of user or "api" if the message was programatically generated}
+        /// message: message text
+        /// </summary>
+        /// <param name="roomId"></param>
+        /// <returns></returns>
+        public Dictionary<string,object> getChatHistory(string roomId)
         {
-            string history = string.Empty;
+            Dictionary<string, object> history = new Dictionary<string, object>();
             string uri =
                 string.Format(
                     "https://api.hipchat.com/v1/rooms/history?room_id={0}&date={1}&timezone=MST&format=json&auth_token={2}", roomId, DateTime.Now.ToString("yyyy-MM-dd"), hipchatAuthToken);
@@ -68,7 +77,6 @@ namespace HipChatBot
                 try
                 {
                     webResponse = webClient.DownloadString(uri);
-                    Console.WriteLine(webResponse);
                 }
                 catch (WebException ex)
                 {
@@ -91,10 +99,20 @@ namespace HipChatBot
                 }
             }
 
-            Console.WriteLine(webResponse);
+            var dict = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(webResponse);
+            if (dict != null)
+            {
+                var messages = (ArrayList)dict["messages"];
+                foreach (var o in messages)
+                {
+                    history = (Dictionary<string, object>) o;
+                    //Console.WriteLine(history["message"]);
+                }
+            }
 
             return history;
         }
+
 
         public string getUserList(string roomId)
         {
