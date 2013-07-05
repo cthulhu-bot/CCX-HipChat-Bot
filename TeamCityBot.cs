@@ -13,8 +13,13 @@ namespace HipChatBot
 
             string testRoom = "232822";
 
-            Console.WriteLine(bot.getChatHistory(testRoom));
-            
+            //while (true)
+            //{
+                string lastMessage = bot.getLastMessage(testRoom);
+
+                System.Threading.Thread.Sleep(1000);
+            //}
+
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
         }

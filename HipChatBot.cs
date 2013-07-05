@@ -63,9 +63,9 @@ namespace HipChatBot
         /// </summary>
         /// <param name="roomId"></param>
         /// <returns></returns>
-        public Dictionary<string,object> getChatHistory(string roomId)
+        public Dictionary<DateTime, KeyValuePair<string, string>> getChatHistory(string roomId)
         {
-            Dictionary<string, object> history = new Dictionary<string, object>();
+            Dictionary<DateTime, KeyValuePair<string, string>> history = new Dictionary<DateTime, KeyValuePair<string, string>>();
             string uri =
                 string.Format(
                     "https://api.hipchat.com/v1/rooms/history?room_id={0}&date={1}&timezone=MST&format=json&auth_token={2}", roomId, DateTime.Now.ToString("yyyy-MM-dd"), hipchatAuthToken);
@@ -105,12 +105,30 @@ namespace HipChatBot
                 var messages = (ArrayList)dict["messages"];
                 foreach (var o in messages)
                 {
-                    history = (Dictionary<string, object>) o;
-                    //Console.WriteLine(history["message"]);
+                    Dictionary<string, object> message = (Dictionary<string, object>)o;
+                    KeyValuePair<string, string> userMessage = new KeyValuePair<string, string>();
+                    Dictionary<string, string> user = (Dictionary<string, string>) message["from"];
+                    string userName = user["name"];
+                    string mess = message["message"].ToString();
+
+                    history.Add((DateTime)message["date"], new KeyValuePair<string, string>(userName, mess));
                 }
             }
 
             return history;
+        }
+
+        public string getLastMessage(string roomID)
+        {
+            Dictionary<DateTime, KeyValuePair<string, string>> history = getChatHistory(roomID);
+
+            //Sort the dictionary according to message timestamp
+            List<KeyValuePair<string, object>> messages = history.ToList();
+            messages.Sort(
+                delegate()
+            );
+
+            return "";
         }
 
 
