@@ -1,0 +1,11 @@
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\bin\Debug\TeamChatBotApp.exe.config
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\bin\Debug\TeamChatBotApp.exe
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\bin\Debug\TeamChatBotApp.pdb
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\bin\Debug\HipChatBots.dll
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\bin\Debug\HipChatBots.pdb
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\obj\Debug\TeamChatBotApp.csprojResolveAssemblyReference.cache
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\obj\Debug\TeamChatBotApp.exe
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\obj\Debug\TeamChatBotApp.pdb
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\bin\Debug\Ninject.dll
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\bin\Debug\Ninject.pdb
+C:\git\github\CCX-HipChat-Bot\TeamChatBotApp\bin\Debug\Ninject.xml

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HipChatBots", "HipChatBots.csproj", "{A477A2ED-CE14-4556-BCD9-586307055A9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamChatBotApp", "..\TeamChatBotApp\TeamChatBotApp.csproj", "{D25039AF-D6F0-49A9-A057-3685DB14D80C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A477A2ED-CE14-4556-BCD9-586307055A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A477A2ED-CE14-4556-BCD9-586307055A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A477A2ED-CE14-4556-BCD9-586307055A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A477A2ED-CE14-4556-BCD9-586307055A9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D25039AF-D6F0-49A9-A057-3685DB14D80C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D25039AF-D6F0-49A9-A057-3685DB14D80C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D25039AF-D6F0-49A9-A057-3685DB14D80C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D25039AF-D6F0-49A9-A057-3685DB14D80C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
