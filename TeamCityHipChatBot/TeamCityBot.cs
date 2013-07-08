@@ -6,8 +6,7 @@ namespace HipChatBots
 {
 	public class TeamCityBot 
 	{
-		public TeamCityBot(HipChatBot bot, string roomId)
-			//: base("foo", "foo", "foo")
+		public TeamCityBot(HipChatBot bot, string roomId)			
 		{
 			Bot = bot;
 			RoomId = roomId;

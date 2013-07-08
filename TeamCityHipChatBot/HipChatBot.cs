@@ -9,11 +9,11 @@ namespace HipChatBots
 {
 	public class HipChatBot
     {
-		public string HipchatAuthToken { get; set; }//= "1b16612f462a4488e243f4cdd49136";
+		public string HipchatAuthToken { get; set; } //= "1b16612f462a4488e243f4cdd49136";
 
-		public string HipchatApiId { get; set; }//= "228638";
+		public string HipchatApiId { get; set; } //= "228638";
 
-		public string Jid { get; set; }// = "55332_ccx_general@conf.hipchat.com";
+		public string Jid { get; set; } // = "55332_ccx_general@conf.hipchat.com";
 
 		public HipChatBot(string hipchatAuthToken, string hipchatApiId, string jid)
 		{
@@ -196,7 +196,7 @@ namespace HipChatBots
             {
                 Console.WriteLine("value type: {0}", o.Value.GetType());
 
-                List<object> objects = (List<object>)o.Value;
+                var objects = (List<object>)o.Value;
 
                 foreach (var o2 in objects)
                 {
